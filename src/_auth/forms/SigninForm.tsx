@@ -1,6 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
+// import { useToast } from '@/components/ui/use-toast';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Form,
   FormControl,
@@ -21,7 +23,7 @@ import {
 import { useUserContext } from '@/context/AuthContext';
 
 const SigninForm = () => {
-  const { toast } = useToast();
+  // const { toast } = useToast();
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
   const navigate = useNavigate();
 
@@ -46,9 +48,10 @@ const SigninForm = () => {
     });
 
     if (!session) {
-      return toast({
-        title: 'Sign in failed! Please try again.',
-      });
+      return toast.error(
+        'Sign in failed! Please try again.',
+        {position: 'top-center'}
+      );
     }
 
     const isLoggedIn = await checkAuthUser();
@@ -58,8 +61,8 @@ const SigninForm = () => {
 
       navigate('/');
     } else {
-      return toast({
-        title: 'Sign up failed! Please try again.',
+      return toast.error('Sign in failed! Please try again.', {
+        position: 'top-center',
       });
     }
   }
@@ -115,11 +118,13 @@ const SigninForm = () => {
             )}
           </Button>
 
+          <ToastContainer />
+
           <p className='text-small-regular text-light-2 text-center mt-2'>
             Don't have an account?
             <Link
               to='/sign-up'
-              className='text-primary-500 text-small-semibold'
+              className='text-primary-500 hover:text-primary-500/85 text-small-semibold'
             >
               {' '}
               Sign up

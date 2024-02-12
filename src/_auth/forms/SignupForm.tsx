@@ -14,7 +14,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Loader from '@/components/shared/Loader';
-import { useToast } from '@/components/ui/use-toast';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {
   useCreateUserAccount,
@@ -24,7 +25,7 @@ import { SignupValidation } from '@/lib/validation';
 import { useUserContext } from '@/context/AuthContext';
 
 const SignupForm = () => {
-  const { toast } = useToast();
+  // const { toast } = useToast();
   const navigate = useNavigate();
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
@@ -50,7 +51,8 @@ const SignupForm = () => {
       const newUser = await createUserAccount(user);
 
       if (!newUser) {
-        toast({ title: 'Sign up failed. Please try again.' });
+        toast.error('Sign up failed. Please try again.',
+        {position: 'top-center'});
 
         return;
       }
@@ -61,7 +63,8 @@ const SignupForm = () => {
       });
 
       if (!session) {
-        toast({ title: 'Something went wrong. Please login your new account' });
+        toast.error('Something went wrong. Please login your new account',
+        {position: 'top-center'});
 
         navigate('/sign-in');
 
@@ -75,7 +78,8 @@ const SignupForm = () => {
 
         navigate('/');
       } else {
-        toast({ title: 'Login failed. Please try again.' });
+        toast.error('Login failed. Please try again.',
+        {position: 'top-center'});
 
         return;
       }
@@ -87,7 +91,7 @@ const SignupForm = () => {
   return (
     <Form {...form}>
       <div className='sm:w-420 flex-center flex-col'>
-        <img src='/assets/images/logo.svg' alt='logo' />
+        <img src='/assets/images/logo.svg' alt='logo' className='h-9' />
 
         <h2 className='h3-bold md:h2-bold pt-5 sm:pt-12'>
           Create a new account
@@ -166,11 +170,13 @@ const SignupForm = () => {
             )}
           </Button>
 
+          <ToastContainer />
+
           <p className='text-small-regular text-light-2 text-center mt-2'>
             Already have an account?
             <Link
               to='/sign-in'
-              className='text-primary-500 text-small-semibold ml-1'
+              className='text-primary-500 hover:text-primary-500/85 text-small-semibold ml-1'
             >
               Log in
             </Link>
