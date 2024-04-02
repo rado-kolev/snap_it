@@ -43,7 +43,7 @@ Make sure you have the following installed on your machine:
 
 ```
 git clone https://github.com/rado-kolev/snap_it.git
-cd brainwave
+cd snap_it
 ```
 
 #### _Installation_
