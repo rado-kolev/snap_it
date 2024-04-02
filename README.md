@@ -6,7 +6,7 @@
 
 ## 📜 Description
 
-Snap_It is an Instagram clone, that allows users to share and explore photos. It is developed using React.js, TypeScript, Zod, Tailwind CSS, shadcn/ui, React Hook Form, and a few more packages and libraries.
+Snap_It is a fun and interactive Instagram clone, that allows users to share and explore photos. It is developed using React.js, TypeScript, Zod, Tailwind CSS, shadcn/ui, React Hook Form, and a few more packages and libraries.
 
 <br/>
 
